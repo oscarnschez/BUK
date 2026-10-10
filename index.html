@@ -633,38 +633,11 @@ table.sheet { min-width: 100%; border-collapse: separate; border-spacing: 0; fon
 .poster-mini::after { content: "07"; position: absolute; left: 8px; top: 12%; font-family: var(--f-display); font-weight: 900; font-stretch: 62%; font-size: 3.4rem; line-height: .8; color: var(--carbon); }
 .poster-prev { display: block; width: 100%; max-width: 440px; margin: 0 auto; border: var(--b2) solid var(--rule); }
 
-/* ---------- Identidad ---------- */
-.marks { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); border-left: var(--b2) solid var(--rule); }
-.mark { min-width: 0; display: flex; flex-direction: column; border-right: var(--b2) solid var(--rule); border-bottom: var(--b2) solid var(--rule); }
-.mark .mh { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; padding: 10px 14px; border-bottom: var(--b1) solid var(--rule); }
-.mark .mh .label:first-child { color: var(--accent-ink); }
-.mark .stage { min-height: 240px; display: flex; align-items: center; justify-content: center; padding: 28px; }
-.mark .stage svg { display: block; width: 100%; height: auto; }
-.stage.paper { background: var(--paper); }
-.stage.carbon { background: var(--carbon); }
-.stage.concrete { background: var(--concrete); }
-.mark .mf { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; margin-top: auto; padding: 12px 14px; border-top: var(--b1) solid var(--rule); }
-.mark .mf p { margin: 0 auto 0 0; font-size: .9rem; color: var(--muted); }
-.icons { display: flex; align-items: flex-end; gap: 22px; }
-.swatches { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); border-left: var(--b2) solid var(--rule); }
-.sw { min-width: 0; border-right: var(--b2) solid var(--rule); border-bottom: var(--b2) solid var(--rule); }
-.sw .chip { height: 120px; border-bottom: var(--b2) solid var(--rule); }
-.sw .info { padding: 10px 12px; }
-.sw .info b { display: block; font-family: var(--f-display); font-weight: 800; font-stretch: 72%; font-size: 1.05rem; line-height: 1.1; text-transform: uppercase; }
-.specimen { display: grid; grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); border-left: var(--b2) solid var(--rule); }
-.specimen > div { min-width: 0; padding: 20px 22px; border-right: var(--b2) solid var(--rule); border-bottom: var(--b2) solid var(--rule); }
-.specimen .s1 { margin-top: 12px; font-family: var(--f-display); font-weight: 900; font-stretch: 62%; font-size: clamp(3rem, 8vw, 6.5rem); line-height: .82; text-transform: uppercase; }
-.specimen .s2 { margin-top: 12px; font-family: var(--f-label); font-weight: 600; font-size: 1.3rem; letter-spacing: .06em; text-transform: uppercase; }
-.specimen p { margin: 16px 0 0; max-width: 46ch; }
-.rules-list { margin: 0; padding: 0; list-style: none; border-left: var(--b2) solid var(--rule); display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); }
-.rules-list li { min-width: 0; padding: 14px 16px; border-right: var(--b2) solid var(--rule); border-bottom: var(--b2) solid var(--rule); }
-.rules-list b { display: block; margin-bottom: 4px; font-family: var(--f-display); font-weight: 900; font-stretch: 66%; font-size: 1.3rem; text-transform: uppercase; }
-
 .banner { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; justify-content: space-between; margin: 18px 0 0; padding: 12px 16px; border: var(--b2) solid var(--red); }
 
 /* Pie */
 footer.foot { border-top: var(--b4) solid var(--rule); }
-.foot-in { display: grid; grid-template-columns: auto minmax(0, 1fr) auto; gap: 18px 28px; align-items: center; padding-block: 22px 32px; }
+.foot-in { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 18px 28px; align-items: center; padding-block: 22px 32px; }
 .foot-in svg { display: block; width: auto; height: 26px; }
 .foot-in .mid { display: flex; flex-wrap: wrap; gap: 6px 22px; color: var(--muted); }
 .store-dot { display: inline-block; width: 10px; height: 10px; margin-right: 8px; background: var(--fg); }
@@ -708,7 +681,6 @@ footer.foot { border-top: var(--b4) solid var(--rule); }
   .report { grid-template-columns: minmax(0, 1fr); }
   .summary { grid-template-columns: repeat(3, minmax(0, 1fr)); }
   .summary div { border-bottom: var(--b1) solid var(--rule); }
-  .rules-list { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 }
 @media (max-width: 760px) {
   body { font-size: 16px; }
@@ -776,8 +748,6 @@ footer.foot { border-top: var(--b4) solid var(--rule); }
   .sheet-tools .btn { flex: 1 1 100%; border-left: 0; border-top: var(--b1) solid var(--rule); }
   .statusbar .help { display: none; }
   .panel { padding: 16px; }
-  .marks, .specimen, .rules-list { grid-template-columns: minmax(0, 1fr); }
-  .swatches { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .foot-in { grid-template-columns: minmax(0, 1fr); }
   .foot-in .kbdhint { display: none; }
   .empty { grid-template-columns: minmax(0, 1fr); }
@@ -945,40 +915,12 @@ footer.foot { border-top: var(--b4) solid var(--rule); }
     <div class="report" id="report"></div>
   </section>
 
-  <!-- Identidad -->
-  <section id="v-marca" aria-labelledby="h-marca" hidden>
-    <div class="view-head">
-      <span class="vn" aria-hidden="true">ID</span>
-      <h1 id="h-marca">Identidad</h1>
-      <div class="aside"><span class="label">Read. Think. Rebel.</span></div>
-    </div>
-    <div class="sec-title"><h2>Logotipo</h2><span class="label">Variantes de uso</span></div>
-    <div class="marks" id="marks"></div>
-    <div class="sec-title"><h2>Color</h2><span class="label">Paleta estricta</span></div>
-    <div class="swatches" id="swatches"></div>
-    <p class="note" style="margin:12px 0 0">En modo oscuro, el texto pequeño en rojo se aclara a #CA7D73 para que se lea sobre negro carbón. Los bloques, botones y la diéresis conservan el rojo industrial #AE3027.</p>
-    <div class="sec-title"><h2>Tipografía</h2><span class="label">Archivo / IBM Plex Sans Condensed</span></div>
-    <div class="specimen">
-      <div><span class="label">Archivo, black condensada, titulares</span><div class="s1">Read. Think. Rebel.</div></div>
-      <div><span class="label">IBM Plex Sans Condensed, señalización</span><div class="s2">001 / Filosofía<br>Sección 02 / Archivo</div><p>Archivo regular para la lectura: sinopsis, notas y descripciones.</p></div>
-    </div>
-    <div class="sec-title"><h2>Reglas</h2><span class="label">Para todo lo que lleve la marca</span></div>
-    <ul class="rules-list">
-      <li><b>Siempre BÜK.</b>Con diéresis y punto final. En direcciones web y nombres de archivo: buk.</li>
-      <li><b>Esquinas rectas</b>Sin redondeos, sin sombras suaves, sin degradados ni vidrio.</li>
-      <li><b>Rojo con intención</b>Para señalar: acciones, números de sección, lo leído. Nunca de relleno.</li>
-      <li><b>Reglas visibles</b>Las líneas dividen y ordenan. La retícula se ve.</li>
-      <li><b>Movimiento seco</b>Entre 150 y 250 ms, sin rebotes ni curvas elásticas.</li>
-      <li><b>Sin dibujos de libros</b>La marca es tipográfica. Nada de edificios, estantes ni libros abiertos.</li>
-    </ul>
-  </section>
 </main>
 
 <footer class="foot">
   <div class="foot-in wrap">
     <div id="foot-mark"></div>
     <div class="mid label"><span>An archive of radical reading.</span><span id="storage-note"></span><span class="kbdhint">Pulsa <span class="kbd">/</span> para buscar</span></div>
-    <div><button class="uline" type="button" data-go="marca">Identidad BÜK.</button></div>
   </div>
 </footer>
 
@@ -1173,59 +1115,12 @@ function wordGroup(ink, dot) {
 }
 const svgOpen = (vb, label) => `<svg xmlns="http://www.w3.org/2000/svg" viewBox="${vb}" role="img" aria-label="${label}">`;
 const wordmark = (ink, dot) => `${svgOpen('-2 -38 296 140', 'BÜK.')}${wordGroup(ink, dot)}</svg>`;
-const TAG_FONT = `font-family="Archivo, 'Arial Narrow', Arial, sans-serif" font-weight="900" font-stretch="condensed"`;
-function horizontalLogo(ink, dot, sub) {
-  return `${svgOpen('-2 -38 470 140', 'BÜK. Read. Think. Rebel.')}${wordGroup(ink, dot)}
-    <rect x="316" y="-30" width="6" height="130" fill="${ink}"/>
-    <text x="340" y="4" ${TAG_FONT} font-size="34" fill="${ink}">READ.</text>
-    <text x="340" y="50" ${TAG_FONT} font-size="34" fill="${ink}">THINK.</text>
-    <text x="340" y="96" ${TAG_FONT} font-size="34" fill="${sub}">REBEL.</text></svg>`;
-}
-function compactLogo(ink, dot, sub) {
-  return `${svgOpen('-2 -38 296 186', 'BÜK. Read. Think. Rebel.')}${wordGroup(ink, dot)}
-    <rect x="0" y="114" width="292" height="4" fill="${ink}"/>
-    <text x="146" y="146" text-anchor="middle" ${TAG_FONT} font-size="21" letter-spacing="2.6" fill="${sub}">READ. THINK. REBEL.</text></svg>`;
-}
-const ICON_FIT = word => {
-  const s = word ? .26 : .62, w = word ? 292 : 76;
-  return { s, tx: (100 - w * s) / 2, ty: (100 - 135 * s) / 2 + 35 * s };
-};
-function iconSVG(bg, ink, dot, word) {
-  const k = ICON_FIT(word);
-  const inner = word ? wordGroup(ink, dot) : `<path fill="${ink}" d="${P_U}"/><circle fill="${dot}" cx="15" cy="-22" r="13"/><circle fill="${dot}" cx="61" cy="-22" r="13"/>`;
-  return `${svgOpen('0 0 100 100', 'BÜK.')}<rect width="100" height="100" fill="${bg}"/><g transform="translate(${k.tx.toFixed(2)} ${k.ty.toFixed(2)}) scale(${k.s})">${inner}</g></svg>`;
-}
-/* Mismo dibujo en canvas, para exportar PNG con la tipografía cargada */
+/* Mismo dibujo en canvas, para el cartel */
 function setStretch(c, st) { try { c.fontStretch = st; } catch {} }
 function drawWord(c, ink, dot) {
   [[P_B, 0], [P_U, 89], [P_K, 174]].forEach(([d, tx]) => { c.save(); c.translate(tx, 0); c.fillStyle = ink; c.fill(new Path2D(d), 'evenodd'); c.restore(); });
   c.fillStyle = dot;
   DOTS.forEach(([x, y]) => { c.beginPath(); c.arc(x, y, 13, 0, Math.PI * 2); c.fill(); });
-}
-function drawU(c, ink, dot) {
-  c.fillStyle = ink; c.fill(new Path2D(P_U));
-  c.fillStyle = dot; [[15, -22], [61, -22]].forEach(([x, y]) => { c.beginPath(); c.arc(x, y, 13, 0, Math.PI * 2); c.fill(); });
-}
-function tagFont(c, sz) { c.font = `900 ${sz}px Archivo, "Arial Narrow", Arial, sans-serif`; setStretch(c, 'condensed'); }
-function drawHorizontal(c, ink, dot, sub) {
-  drawWord(c, ink, dot);
-  c.fillStyle = ink; c.fillRect(316, -30, 6, 130);
-  tagFont(c, 34); c.textBaseline = 'alphabetic';
-  c.fillText('READ.', 340, 4); c.fillText('THINK.', 340, 50);
-  c.fillStyle = sub; c.fillText('REBEL.', 340, 96);
-}
-function drawCompact(c, ink, dot, sub) {
-  drawWord(c, ink, dot);
-  c.fillStyle = ink; c.fillRect(0, 114, 292, 4);
-  tagFont(c, 21); try { c.letterSpacing = '2.6px'; } catch {}
-  c.textAlign = 'center'; c.fillStyle = sub; c.fillText('READ. THINK. REBEL.', 146, 146);
-}
-function drawIcon(c, bg, ink, dot, word) {
-  const k = ICON_FIT(word);
-  c.fillStyle = bg; c.fillRect(0, 0, 100, 100);
-  c.save(); c.translate(k.tx, k.ty); c.scale(k.s, k.s);
-  if (word) drawWord(c, ink, dot); else drawU(c, ink, dot);
-  c.restore();
 }
 
 /* ================= Categorías y secciones ================= */
@@ -1385,7 +1280,7 @@ function stats() {
 const withEstado = (b, estado) => ({ estado, terminado: estado === 'leido' ? (b.terminado || todayISO()) : '' });
 
 /* ================= Estado de la interfaz ================= */
-const VIEWS = ['home', 'archivo', 'registro', 'informe', 'marca'];
+const VIEWS = ['home', 'archivo', 'registro', 'informe'];
 const ui = {
   view: 'home', mode: 'fichas', field: 'all', q: '', genre: null, sort: 'genero',
   justAdded: null, openId: null, loanEditing: false, sugIndex: -1, animateGrid: true, heroDone: false,
@@ -1396,7 +1291,7 @@ try {
   const saved = JSON.parse(localStorage.getItem('mi-biblioteca:ui') || '{}');
   const legacy = { shelf: 'archivo', panel: 'registro', report: 'informe' };
   const v = legacy[saved.view] || saved.view;
-  if (VIEWS.includes(v) && v !== 'marca') ui.view = v;
+  if (VIEWS.includes(v)) ui.view = v;
   if (['genero', 'titulo', 'autor', 'anio', 'recientes'].includes(saved.sort)) ui.sort = saved.sort;
   if (saved.mode === 'lomos' || saved.mode === 'repisas') ui.mode = 'lomos';
 } catch {}
@@ -2228,57 +2123,6 @@ async function makeCartel() {
   $('#dlg-cartel').showModal();
 }
 
-/* ================= Identidad ================= */
-const MARKS = [
-  { id: 'horizontal', code: 'A', name: 'Horizontal', stage: 'paper', vb: [-2, -38, 470, 140], width: 560, png: [2400],
-    desc: 'Uso principal: cabeceras, carteles y documentos.',
-    svg: () => horizontalLogo(PAL.carbon, PAL.red, PAL.red), draw: c => drawHorizontal(c, PAL.carbon, PAL.red, PAL.red) },
-  { id: 'compacta', code: 'B', name: 'Compacta', stage: 'concrete', vb: [-2, -38, 296, 186], width: 340, png: [1600],
-    desc: 'Para formatos cuadrados, perfiles y portadas.',
-    svg: () => compactLogo(PAL.carbon, PAL.red, PAL.graphite), draw: c => drawCompact(c, PAL.carbon, PAL.red, PAL.graphite) },
-  { id: 'monocromatica', code: 'C', name: 'Monocromática', stage: 'paper', vb: [-2, -38, 296, 140], width: 360, png: [1600], svgOk: true,
-    desc: 'Una sola tinta, para sellos e impresión a un color.',
-    svg: () => wordmark(PAL.carbon, PAL.carbon), draw: c => drawWord(c, PAL.carbon, PAL.carbon) },
-  { id: 'monocromatica-inversa', code: 'C2', name: 'Monocromática inversa', stage: 'carbon', vb: [-2, -38, 296, 140], width: 360, png: [1600], svgOk: true,
-    desc: 'Sobre fondos oscuros o fotografía.',
-    svg: () => wordmark(PAL.paper, PAL.paper), draw: c => drawWord(c, PAL.paper, PAL.paper) },
-  { id: 'favicon', code: 'D', name: 'Favicon', stage: 'concrete', vb: [0, 0, 100, 100], sizes: [128, 64, 32, 16], png: [32, 180], svgOk: true,
-    desc: 'La Ü con su diéresis: se reconoce a 16 px.',
-    svg: () => iconSVG(PAL.carbon, PAL.paper, PAL.red, false), draw: c => drawIcon(c, PAL.carbon, PAL.paper, PAL.red, false) },
-  { id: 'app', code: 'E', name: 'Ícono de app (PWA)', stage: 'paper', vb: [0, 0, 100, 100], sizes: [128, 64, 40], png: [192, 512], svgOk: true,
-    desc: 'Para instalar en el teléfono. Marca dentro del área segura.',
-    svg: () => iconSVG(PAL.red, PAL.paper, PAL.carbon, true), draw: c => drawIcon(c, PAL.red, PAL.paper, PAL.carbon, true) }
-];
-function renderMarca() {
-  $('#marks').innerHTML = MARKS.map(m => {
-    const preview = m.sizes
-      ? `<div class="icons">${m.sizes.map(px => `<div style="width:${px}px">${m.svg()}</div>`).join('')}</div>`
-      : `<div style="width:min(100%, ${m.width}px)">${m.svg()}</div>`;
-    const btns = (m.svgOk ? `<button class="btn sm" type="button" data-dl="${m.id}" data-fmt="svg">SVG</button>` : '')
-      + m.png.map(px => `<button class="btn sm" type="button" data-dl="${m.id}" data-fmt="png" data-px="${px}">PNG ${px}</button>`).join('');
-    return `<div class="mark"><div class="mh"><span class="label">${m.code}</span><span class="label">${m.name}</span></div><div class="stage ${m.stage}">${preview}</div><div class="mf"><p>${m.desc}</p>${canDownload() ? btns : ''}</div></div>`;
-  }).join('');
-  const sw = [['Rojo industrial', PAL.red, 'Acento y señal'], ['Negro carbón', PAL.carbon, 'Bloques y texto'], ['Blanco envejecido', PAL.paper, 'Fondo claro'], ['Gris concreto', PAL.concrete, 'Superficies'], ['Gris tipográfico', PAL.graphite, 'Texto secundario']];
-  $('#swatches').innerHTML = sw.map(([n, hex, use]) => `<div class="sw"><div class="chip" style="background:${hex}"></div><div class="info"><b>${n}</b><span class="label">${hex} / ${use}</span></div></div>`).join('');
-}
-async function markPng(m, px) {
-  try { await document.fonts.load('900 34px "Archivo"'); } catch {}
-  const [vx, vy, vw, vh] = m.vb;
-  const cv = document.createElement('canvas');
-  cv.width = px; cv.height = Math.round(px * vh / vw);
-  const c = cv.getContext('2d');
-  c.scale(px / vw, px / vw); c.translate(-vx, -vy);
-  m.draw(c);
-  return new Promise((res, rej) => cv.toBlob(b => b ? res(b) : rej(new Error('png')), 'image/png'));
-}
-async function downloadMark(id, fmt, px) {
-  const m = MARKS.find(k => k.id === id);
-  if (!m) return;
-  if (fmt === 'svg') return saveFile(`buk-${id}.svg`, '<?xml version="1.0" encoding="UTF-8"?>\n' + m.svg(), 'SVG descargado');
-  try { await saveFile(`buk-${id}-${px}.png`, await markPng(m, +px), 'PNG descargado'); }
-  catch { toast('No se pudo generar la imagen.', true); }
-}
-
 /* ================= Sorteo ================= */
 const sorteo = { pool: [], idx: 0, timer: null, pick: null, spinning: false };
 function reelRow(b, cls) { return b ? `<div class="reel-row ${cls}"><span class="i">${inv3(b)}</span><span class="t">${esc(b.titulo)}</span></div>` : `<div class="reel-row ${cls}"></div>`; }
@@ -2373,7 +2217,6 @@ function renderAll() {
   else if (ui.view === 'archivo') { renderArchivo(); renderSuggest(); }
   else if (ui.view === 'registro') { renderSummary(); renderSheet(); }
   else if (ui.view === 'informe') { if (!document.activeElement || document.activeElement.id !== 'goal') renderReport(); }
-  else if (ui.view === 'marca') renderMarca();
   const ae = document.activeElement;
   if ($('#dlg-book').open && !(ae && ae.id === 'loan-who')) renderDrawer();
   renderMigrate();
@@ -2484,8 +2327,6 @@ document.addEventListener('click', e => {
   if (sec) { ui.genre = sec.dataset.sec; ui.q = ''; qInput.value = ''; $('#q-clear').classList.remove('show'); setView('archivo'); return; }
   const op = e.target.closest('[data-open]');
   if (op) { const d = op.closest('dialog'); if (d && d.id !== 'dlg-book') d.close(); openBook(op.dataset.open); return; }
-  const dl = e.target.closest('[data-dl]');
-  if (dl) { downloadMark(dl.dataset.dl, dl.dataset.fmt, dl.dataset.px); return; }
   const a = e.target.closest('[data-action]');
   if (a) {
     const act = a.dataset.action;
@@ -2643,7 +2484,6 @@ Store.init();
     ui.sample = sm || null;
   } catch { ui.sample = null; }
   if (ui.view === 'informe') renderReport();
-  if (ui.view === 'marca') renderMarca();
 })();
 })();
 </script>
