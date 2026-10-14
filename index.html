@@ -11,10 +11,10 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-title" content="BÜK.">
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
-<link rel="manifest" href="manifest.webmanifest">
-<link rel="icon" href="icons/favicon.svg" type="image/svg+xml">
-<link rel="icon" href="icons/favicon-32.png" sizes="32x32" type="image/png">
-<link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+<link rel="manifest" href="manifest.webmanifest?v=2">
+<link rel="icon" href="icons/favicon.svg?v=2" type="image/svg+xml">
+<link rel="icon" href="icons/favicon-32.png?v=2" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" sizes="180x180" href="icons/apple-touch-icon.png?v=2">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}img{max-width:100%}[hidden]{display:none!important}</style>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -646,6 +646,34 @@ table.sheet { min-width: 100%; border-collapse: separate; border-spacing: 0; fon
 .advice p { margin: 0; max-width: 62ch; }
 .advice .row { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 14px; }
 .advice.idle { color: var(--muted); }
+.globe-wrap { display: grid; grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); gap: 20px 28px; align-items: start; }
+.globe-stage { position: relative; width: 100%; max-width: 560px; aspect-ratio: 1; margin: 0 auto; }
+.globe-stage canvas { display: block; width: 100%; height: 100%; touch-action: pan-y; cursor: grab; }
+.globe-stage canvas:active { cursor: grabbing; }
+.globe-stage[data-state="loading"]::after { content: "Cargando el globo…"; position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; border: var(--b2) solid var(--rule); border-radius: 50%; font-family: var(--f-label); font-weight: 600; font-size: .85rem; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); }
+.globe-msg { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; margin: 0; padding: 24px; text-align: center; border: var(--b2) dashed var(--rule); border-radius: 50%; }
+#globe-cap { min-height: 1.2em; margin: 10px 0 0; text-align: center; color: var(--muted); }
+.globe-count { display: flex; align-items: flex-end; gap: 14px; padding-bottom: 12px; border-bottom: var(--b2) solid var(--rule); }
+.globe-count b { font-family: var(--f-display); font-weight: 900; font-stretch: 62%; font-size: 4.6rem; line-height: .8; font-variant-numeric: tabular-nums; }
+.globe-count .label { color: var(--muted); }
+.paises { margin: 0; padding: 0; list-style: none; max-height: 392px; overflow-y: auto; border-bottom: var(--b1) solid var(--rule); }
+.paises button { width: 100%; display: grid; grid-template-columns: 34px minmax(0, 1fr) auto; gap: 10px; align-items: baseline; padding: 9px 4px; border: 0; border-bottom: var(--b1) solid var(--rule); background: none; color: var(--fg); text-align: left; transition: background-color var(--t) var(--ease), color var(--t) var(--ease); }
+.paises li:last-child button { border-bottom: 0; }
+.paises button:hover { background: var(--block); }
+.paises button[aria-pressed="true"] { background: var(--fg); color: var(--bg); }
+.paises .pc { font-family: var(--f-label); font-weight: 700; font-size: .8rem; letter-spacing: .06em; color: var(--accent-ink); }
+.paises button[aria-pressed="true"] .pc { color: inherit; }
+.paises .pn { font-family: var(--f-display); font-weight: 800; font-stretch: 72%; font-size: 1.15rem; line-height: 1.05; text-transform: uppercase; overflow-wrap: anywhere; }
+.paises .pn small { display: block; font-family: var(--f-label); font-weight: 500; font-size: .72rem; letter-spacing: .04em; text-transform: none; opacity: .8; }
+.paises b { font-family: var(--f-label); font-weight: 700; font-variant-numeric: tabular-nums; }
+.pais-libros { margin-top: 14px; }
+.pais-libros h3 { font-family: var(--f-display); font-weight: 900; font-stretch: 66%; font-size: 1.6rem; line-height: 1; text-transform: uppercase; }
+.pais-libros ul { margin: 8px 0 0; padding: 0; list-style: none; }
+.pais-libros li button { width: 100%; display: grid; grid-template-columns: 40px minmax(0, 1fr); gap: 10px; padding: 7px 0; border: 0; border-bottom: var(--b1) solid var(--rule); background: none; color: var(--fg); text-align: left; }
+.pais-libros li button:hover { background: var(--block); }
+.pais-libros .i { font-family: var(--f-label); font-weight: 700; font-size: .8rem; color: var(--accent-ink); }
+.pais-libros .t { font-weight: 600; }
+.pais-libros .a { display: block; font-size: .88rem; color: var(--muted); }
 .poster-row { display: grid; grid-template-columns: 110px minmax(0, 1fr); gap: 18px; align-items: center; }
 .poster-mini { position: relative; width: 110px; max-width: 100%; aspect-ratio: 4 / 5; overflow: hidden; background: var(--paper); border: var(--b2) solid var(--carbon); }
 .poster-mini::before { content: ""; position: absolute; left: 0; right: 0; top: 54%; height: 15%; background: var(--red); }
@@ -746,6 +774,7 @@ footer.foot { border-top: var(--b4) solid var(--rule); }
   .ficha { grid-template-columns: minmax(0, 4fr) minmax(0, 6fr); }
   .dist { grid-template-columns: repeat(3, minmax(0, 1fr)); }
   .report { grid-template-columns: minmax(0, 1fr); }
+  .globe-wrap { grid-template-columns: minmax(0, 1fr); }
   .summary { grid-template-columns: repeat(3, minmax(0, 1fr)); }
   .summary div { border-bottom: var(--b1) solid var(--rule); }
 }
@@ -1011,6 +1040,7 @@ footer.foot { border-top: var(--b4) solid var(--rule); }
 <datalist id="genres"></datalist>
 <datalist id="authors"></datalist>
 <datalist id="publishers"></datalist>
+<datalist id="paises"></datalist>
 <p class="sr-only" id="live" aria-live="polite"></p>
 
 <!-- Registrar / editar -->
@@ -1061,6 +1091,10 @@ footer.foot { border-top: var(--b4) solid var(--rule); }
           <input id="i-paginas" name="paginas" type="number" min="1" max="20000" inputmode="numeric">
         </div>
         <div class="f s2">
+          <label for="i-pais">País de origen</label>
+          <input id="i-pais" name="pais" maxlength="60" list="paises" autocomplete="off" placeholder="México, Rusia…">
+        </div>
+        <div class="f s3">
           <label for="i-compra">Fecha de compra</label>
           <input id="i-compra" name="compra" type="date">
           <label class="check" for="i-compra-desc"><input type="checkbox" id="i-compra-desc"> No sé la fecha</label>
@@ -1265,6 +1299,39 @@ function drawWord(c, ink, dot) {
   DOTS.forEach(([x, y]) => { c.beginPath(); c.arc(x, y, 13, 0, Math.PI * 2); c.fill(); });
 }
 
+/* ================= Países ================= */
+/* El país se guarda como texto ("México"). Para el globo se traduce a su código ISO; acepta nombres en español o inglés y algunos sinónimos. */
+const REGIONS = 'AD AE AF AG AI AL AM AO AQ AR AS AT AU AW AX AZ BA BB BD BE BF BG BH BI BJ BL BM BN BO BQ BR BS BT BV BW BY BZ CA CC CD CF CG CH CI CK CL CM CN CO CR CU CV CW CX CY CZ DE DJ DK DM DO DZ EC EE EG EH ER ES ET FI FJ FK FM FO FR GA GB GD GE GF GG GH GI GL GM GN GP GQ GR GS GT GU GW GY HK HM HN HR HT HU ID IE IL IM IN IO IQ IR IS IT JE JM JO JP KE KG KH KI KM KN KP KR KW KY KZ LA LB LC LI LK LR LS LT LU LV LY MA MC MD ME MF MG MH MK ML MM MN MO MP MQ MR MS MT MU MV MW MX MY MZ NA NC NE NF NG NI NL NO NP NR NU NZ OM PA PE PF PG PH PK PL PM PN PR PS PT PW PY QA RE RO RS RU RW SA SB SC SD SE SG SH SI SJ SK SL SM SN SO SR SS ST SV SX SY SZ TC TD TF TG TH TJ TK TL TM TN TO TR TT TV TW TZ UA UG UM US UY UZ VA VC VE VG VI VN VU WF WS XK XK YE YT ZA ZM ZW'.split(' ');
+const regionName = (() => { try { const dn = new Intl.DisplayNames(['es-MX', 'es'], { type: 'region' }); return c => dn.of(c) || c; } catch { return c => c; } })();
+const PAIS_ALIAS = { 'eeuu': 'US', 'ee uu': 'US', 'eua': 'US', 'usa': 'US', 'estados unidos de america': 'US', 'inglaterra': 'GB', 'escocia': 'GB', 'gales': 'GB', 'irlanda del norte': 'GB', 'gran bretana': 'GB', 'holanda': 'NL', 'urss': 'RU', 'union sovietica': 'RU', 'republica checa': 'CZ', 'corea': 'KR', 'birmania': 'MM', 'persia': 'IR', 'costa de marfil': 'CI' };
+const paisKey = s => norm(s).replace(/[.,]/g, '').replace(/\s+/g, ' ').trim();
+let paisIndex = null;
+function paisCode(name) {
+  const k = paisKey(name);
+  if (!k) return null;
+  if (!paisIndex) {
+    paisIndex = new Map(Object.entries(PAIS_ALIAS));
+    let en = null;
+    try { en = new Intl.DisplayNames(['en'], { type: 'region' }); } catch {}
+    REGIONS.forEach(c => { paisIndex.set(paisKey(regionName(c)), c); if (en) paisIndex.set(paisKey(en.of(c) || ''), c); });
+  }
+  return paisIndex.get(k) || null;
+}
+const paisCanon = v => { const c = paisCode(v); return c ? regionName(c) : capFirst(v); };
+function countryStats() {
+  const m = new Map();
+  let sin = 0;
+  Store.books.forEach(b => {
+    const raw = (b.pais || '').trim();
+    if (!raw) { sin++; return; }
+    const code = paisCode(raw), key = code || 'otro:' + paisKey(raw);
+    if (!m.has(key)) m.set(key, { key, code, name: code ? regionName(code) : capFirst(raw), books: [] });
+    m.get(key).books.push(b);
+  });
+  const list = [...m.values()].sort((a, b) => b.books.length - a.books.length || collator.compare(a.name, b.name));
+  return { list, sin, byKey: new Map(list.map(c => [c.key, c])) };
+}
+
 /* ================= Categorías y secciones ================= */
 const GENEROS = ['Literatura', 'Novela', 'Cuento', 'Poesía', 'Ensayo', 'Filosofía', 'Historia', 'Arquitectura', 'Arte', 'Política', 'Ciencia', 'Biografía', 'Psicología', 'Ciencia ficción', 'Fantasía', 'Misterio', 'Infantil', 'Juvenil', 'Novela gráfica', 'Religión', 'Negocios', 'Viajes', 'Técnico'];
 const genreOf = b => capFirst(b.genero) || 'Sin categoría';
@@ -1450,7 +1517,7 @@ function haystack(b, field) {
     case 'autor': return norm(b.autor);
     case 'genero': return norm(genreOf(b));
     case 'isbn': return isbnClean(b.isbn);
-    default: return [norm(b.titulo), norm(b.autor), norm(genreOf(b)), norm(b.editorial), norm(b.prestadoA), isbnClean(b.isbn).toLowerCase()].join(' ');
+    default: return [norm(b.titulo), norm(b.autor), norm(genreOf(b)), norm(b.editorial), norm(b.pais), norm(b.prestadoA), isbnClean(b.isbn).toLowerCase()].join(' ');
   }
 }
 function matches(b, field, q) {
@@ -1712,7 +1779,7 @@ function renderDrawer() {
       </div>
       <div class="ficha-main">
         <div class="ficha-top">
-          <div class="fid label"><span class="cid">BÜK / ${inv3(b)}</span><span>Sección ${secNo(g)}</span>${b.isbn ? `<span>ISBN ${esc(b.isbn)}</span>` : ''}</div>
+          <div class="fid label"><span class="cid">BÜK / ${inv3(b)}</span><span>Sección ${secNo(g)}</span>${b.pais ? `<span>Origen ${esc(paisCanon(b.pais))}</span>` : ''}${b.isbn ? `<span>ISBN ${esc(b.isbn)}</span>` : ''}</div>
           <h2>${esc(b.titulo)}</h2>
           <p class="fa">${esc(b.autor || 'Autor desconocido')}</p>
           ${b.anio || b.editorial ? `<p class="fy">${esc([b.editorial, b.anio].filter(Boolean).join(', '))}</p>` : ''}
@@ -1788,7 +1855,7 @@ function openForm(id) {
   const set = (k, v) => { $('#i-' + k).value = v ?? ''; };
   if (b) {
     set('titulo', b.titulo); set('autor', b.autor); set('genero', b.genero); set('sinopsis', b.sinopsis); set('isbn', b.isbn);
-    set('editorial', b.editorial); set('anio', b.anio); set('paginas', b.paginas);
+    set('editorial', b.editorial); set('anio', b.anio); set('paginas', b.paginas); set('pais', b.pais);
     set('compra', b.compraDesconocida ? '' : b.compra); $('#i-compra-desc').checked = !!b.compraDesconocida;
     $('#i-estado').value = b.estado || 'por-leer'; set('terminado', b.terminado); set('prestado', b.prestadoA); set('enlace', b.enlace); set('notas', b.notas);
   } else { set('compra', todayISO()); $('#i-compra-desc').checked = false; set('terminado', ''); }
@@ -1865,6 +1932,7 @@ async function submitForm(ev) {
     sinopsis: $('#i-sinopsis').value.trim(),
     isbn: $('#i-isbn').value.trim(),
     editorial: $('#i-editorial').value.trim(),
+    pais: paisCanon($('#i-pais').value),
     anio: Number.isFinite(anio) ? anio : null,
     paginas: Number.isFinite(pags) && pags > 0 ? pags : null,
     compra: unknown ? '' : ($('#i-compra').value || ''),
@@ -1923,6 +1991,7 @@ const COLS = [
   { key: 'titulo', label: 'Título', edit: 'text', cls: 'title' },
   { key: 'autor', label: 'Autor', edit: 'text', list: 'authors' },
   { key: 'genero', label: 'Categoría', edit: 'text', list: 'genres', show: b => genreOf(b) },
+  { key: 'pais', label: 'País', edit: 'text', list: 'paises', show: b => b.pais ? paisCanon(b.pais) : '' },
   { key: 'isbn', label: 'ISBN', edit: 'text' },
   { key: 'editorial', label: 'Editorial', edit: 'text', list: 'publishers' },
   { key: 'anio', label: 'Año', edit: 'number', num: true },
@@ -2049,6 +2118,7 @@ function startEdit(initial) {
       if (col.edit === 'number') { const n = parseInt(v, 10); val = Number.isFinite(n) ? n : null; }
       else if (col.edit === 'rate') val = parseInt(v, 10) || 0;
       else if (col.key === 'genero') val = capFirst(v);
+      else if (col.key === 'pais') val = paisCanon(v);
       else val = v.trim();
       const old = b[col.key] ?? (col.edit === 'number' ? null : '');
       if ((col.key === 'titulo' || col.key === 'autor') && !val) toast(`El ${col.label.toLowerCase()} no puede quedar vacío.`, true);
@@ -2119,15 +2189,15 @@ async function exportExcel() {
   const btn = $('#btn-export'); btn.disabled = true;
   try {
     const XLSX = await loadXLSX();
-    const head = ['Nº inventario', 'Título', 'Autor', 'Categoría', 'Sinopsis', 'ISBN', 'Editorial', 'Año', 'Páginas', 'Estado', 'Terminado', 'Calificación', 'Prestado a', 'Prestado desde', 'Recurso digital', 'Fecha de compra', 'Fecha de registro', 'Hora de registro', 'Notas'];
+    const head = ['Nº inventario', 'Título', 'Autor', 'Categoría', 'País', 'Sinopsis', 'ISBN', 'Editorial', 'Año', 'Páginas', 'Estado', 'Terminado', 'Calificación', 'Prestado a', 'Prestado desde', 'Recurso digital', 'Fecha de compra', 'Fecha de registro', 'Hora de registro', 'Notas'];
     const aoa = [head, ...rows.map(b => {
       const d = new Date(b.creado || 0);
-      return [invOf(b), b.titulo || '', b.autor || '', genreOf(b), b.sinopsis || '', b.isbn || '', b.editorial || '', b.anio || '', b.paginas || '',
+      return [invOf(b), b.titulo || '', b.autor || '', genreOf(b), b.pais || '', b.sinopsis || '', b.isbn || '', b.editorial || '', b.anio || '', b.paginas || '',
         ESTADOS[b.estado || 'por-leer'], b.terminado || '', b.calificacion || '', b.prestadoA || '', b.prestadoFecha || '', b.enlace || '',
         b.compraDesconocida ? 'Desconocida' : (b.compra || ''), `${d.getFullYear()}-${pad(d.getMonth() + 1)}-${pad(d.getDate())}`, `${pad(d.getHours())}:${pad(d.getMinutes())}`, b.notas || ''];
     })];
     const ws = XLSX.utils.aoa_to_sheet(aoa);
-    ws['!cols'] = [12, 36, 26, 16, 50, 18, 20, 7, 9, 10, 12, 12, 18, 14, 30, 15, 16, 14, 40].map(w => ({ wch: w }));
+    ws['!cols'] = [12, 36, 26, 16, 16, 50, 18, 20, 7, 9, 10, 12, 12, 18, 14, 30, 15, 16, 14, 40].map(w => ({ wch: w }));
     ws['!autofilter'] = { ref: XLSX.utils.encode_range({ s: { r: 0, c: 0 }, e: { r: aoa.length - 1, c: head.length - 1 } }) };
     const wb = XLSX.utils.book_new(); XLSX.utils.book_append_sheet(wb, ws, 'Archivo BÜK');
     await saveFile(`buk-archivo-${todayISO()}.xlsx`, XLSX.write(wb, { bookType: 'xlsx', type: 'array' }), 'Archivo de Excel descargado', btn);
@@ -2193,26 +2263,249 @@ function renderReport() {
         : '<div class="advice idle">Ese libro ya no está en el archivo. Pide otra sugerencia.</div>';
     }
     const moods = ['Algo corto', 'Algo intenso', 'Para desconectar', 'Aprender algo', 'Sorpréndeme'];
-    advHTML = `<section class="panel"><h2><span class="label">C</span>Bibliotecario</h2><p class="note">Claude revisa tu pila de pendientes y elige uno según tu ánimo. Solo se envían títulos, autores, categorías y páginas.</p>
+    advHTML = `<section class="panel"><h2><span class="label">%L%</span>Bibliotecario</h2><p class="note">Claude revisa tu pila de pendientes y elige uno según tu ánimo. Solo se envían títulos, autores, categorías y páginas.</p>
       <div class="moods">${moods.map(m => `<button class="cat" type="button" data-mood="${esc(m)}" aria-pressed="${ui.adviceMood === m}" ${!pend.length || (adv && adv.loading) ? 'disabled' : ''}>${m}</button>`).join('')}</div>${inner}</section>`;
   }
+  let letter = 0;
+  const L = () => 'ABCDEFGH'[letter++];
+  globe.data = countryStats();
+  const gd = globe.data, conPais = s.total - gd.sin;
   box.innerHTML = `
-    <section class="panel wide"><h2><span class="label">A</span>Plan de lectura ${YEAR}</h2>
+    <section class="panel wide"><h2><span class="label">${L()}</span>Plan de lectura ${YEAR}</h2>
       <div class="plan">
         <div class="big">${pad(s.readYear, 2)}<small>${meta ? 'de ' + meta : (s.readYear === 1 ? 'leído' : 'leídos')}</small></div>
         <p class="side">${side}</p>${blocks}${noDate}
         <form class="goal-form full" id="goal-form"><label for="goal">Meta del año</label><input id="goal" type="number" min="1" max="500" inputmode="numeric" value="${meta || ''}" placeholder="24"><button class="btn sm solid" type="submit">${meta ? 'Cambiar meta' : 'Fijar meta'}</button></form>
       </div>
     </section>
-    <section class="panel"><h2><span class="label">B</span>Por sección</h2>${SECS.length ? `<div class="gbars">${bars}</div>` : '<p class="note" style="margin:0">Aparecerá cuando registres tu primer libro.</p>'}</section>
+    <section class="panel wide"><h2><span class="label">${L()}</span>Mapa de lecturas</h2>
+      <div class="globe-wrap">
+        <div><div class="globe-stage" id="globe-stage"></div><p class="label" id="globe-cap" aria-live="polite">${globeCaption()}</p></div>
+        <div>
+          <div class="globe-count"><b>${pad(gd.list.length, 2)}</b><span class="label">${gd.list.length === 1 ? 'País' : 'Países'} en el archivo<br>${conPais} de ${s.total} ${s.total === 1 ? 'libro' : 'libros'} con país</span></div>
+          <div id="globe-side">${globeSideHTML()}</div>
+        </div>
+      </div>
+    </section>
+    <section class="panel"><h2><span class="label">${L()}</span>Por sección</h2>${SECS.length ? `<div class="gbars">${bars}</div>` : '<p class="note" style="margin:0">Aparecerá cuando registres tu primer libro.</p>'}</section>
     <div class="stack">
-      ${advHTML}
-      <section class="panel"><h2><span class="label">${ui.sample ? 'D' : 'C'}</span>Cartel del año</h2>
+      ${advHTML ? advHTML.replace('%L%', L()) : ''}
+      <section class="panel"><h2><span class="label">${L()}</span>Cartel del año</h2>
         <div class="poster-row"><div class="poster-mini" aria-hidden="true"></div><div><p class="note" style="margin:0 0 14px">Un cartel BÜK. con tus cifras de ${YEAR}, listo para guardar o compartir.</p><button class="btn sm red" type="button" id="btn-cartel" ${s.total ? '' : 'disabled'}>Componer cartel</button></div></div>
       </section>
     </div>
-    <section class="panel wide"><h2><span class="label">${ui.sample ? 'E' : 'D'}</span>Distinciones ${pad(earned, 2)} / ${pad(DIST.length, 2)}</h2><div class="dist">${badges}</div></section>`;
+    <section class="panel wide"><h2><span class="label">${L()}</span>Distinciones ${pad(earned, 2)} / ${pad(DIST.length, 2)}</h2><div class="dist">${badges}</div></section>`;
+  mountGlobe();
 }
+
+/* ================= Globo ================= */
+/* Proyección ortográfica de d3-geo sobre canvas. Los países con libros van en rojo; los muy pequeños son un punto cuadrado. */
+const D3_URLS = ['https://cdn.jsdelivr.net/npm/d3-array@3.2.4/dist/d3-array.min.js', 'https://cdn.jsdelivr.net/npm/d3-geo@3.1.1/dist/d3-geo.min.js'];
+const globe = { canvas: null, ctx: null, proj: null, path: null, world: null, grat: null, ready: null, data: null, rot: null, sel: null, hover: null, size: 0, raf: 0, last: 0, spin: true, spinT: 0, anim: null, ro: null, visible: false };
+function loadScript(src) {
+  return new Promise((resolve, reject) => { const s = document.createElement('script'); s.src = src; s.onload = resolve; s.onerror = () => reject(new Error(src)); document.head.appendChild(s); });
+}
+function globeLoad() {
+  if (!globe.ready) globe.ready = (async () => {
+    if (!(window.d3 && window.d3.geoOrthographic)) { await loadScript(D3_URLS[0]); await loadScript(D3_URLS[1]); }
+    const r = await fetch('data/paises.json');
+    if (!r.ok) throw new Error('paises');
+    globe.world = (await r.json()).features;
+  })().catch(e => { globe.ready = null; throw e; });
+  return globe.ready;
+}
+const featOf = id => globe.world && globe.world.find(f => f.id === id);
+function centerOf(f) {
+  const g = f.geometry;
+  if (g.type === 'Point') return g.coordinates;
+  if (g.type === 'MultiPolygon') {  // el polígono más grande, para que Francia no se vaya a la Guayana
+    let best = null, area = -1;
+    g.coordinates.forEach(c => { const p = { type: 'Polygon', coordinates: c }, a = d3.geoArea(p); if (a > area) { area = a; best = p; } });
+    return d3.geoCentroid(best);
+  }
+  return d3.geoCentroid(f);
+}
+const facing = ll => d3.geoDistance(ll, [-globe.rot[0], -globe.rot[1]]) < Math.PI / 2;
+function globeCaption() {
+  const id = globe.hover || globe.sel;
+  if (!id) return 'Arrastra para girar. Toca un país.';
+  const c = globe.data && globe.data.byKey.get(id);
+  const name = c ? c.name : regionName(id);
+  const n = c ? c.books.length : 0;
+  return `${name}: ${n ? `${n} ${n === 1 ? 'libro' : 'libros'}` : 'sin libros todavía'}`;
+}
+function globeSideHTML() {
+  const gd = globe.data;
+  if (!gd) return '';
+  const help = '<p class="note" style="margin:12px 0 0">Escribe el país de origen en «Editar ficha» o en la columna País del Panel, y el país se marca en rojo.</p>';
+  if (!gd.list.length) return Store.books.length ? help : '<p class="note" style="margin:12px 0 0">Registra libros y escribe su país de origen para marcarlos en el globo.</p>';
+  const items = gd.list.map(c => `<li><button type="button" data-pais="${esc(c.key)}" aria-pressed="${globe.sel === c.key}"><span class="pc">${c.code || '—'}</span><span class="pn">${esc(c.name)}${c.code ? '' : '<small>No se ubica en el mapa</small>'}</span><b>${pad(c.books.length, 2)}</b></button></li>`).join('');
+  let detail = '';
+  if (globe.sel) {
+    const c = gd.byKey.get(globe.sel);
+    detail = c
+      ? `<div class="pais-libros"><h3>${esc(c.name)}</h3><ul>${c.books.slice().sort(sorter('titulo')).map(b => `<li><button type="button" data-open="${esc(b.id)}"><span class="i">${inv3(b)}</span><span><span class="t">${esc(b.titulo)}</span><span class="a">${esc(b.autor || '')}</span></span></button></li>`).join('')}</ul></div>`
+      : `<div class="pais-libros"><h3>${esc(regionName(globe.sel))}</h3><p class="note" style="margin:8px 0 0">Ningún libro de este país todavía.</p></div>`;
+  }
+  return `<ul class="paises">${items}</ul>${detail}${gd.sin ? `<p class="note" style="margin:12px 0 0">${gd.sin} ${gd.sin === 1 ? 'libro no tiene' : 'libros no tienen'} país.</p>` : ''}`;
+}
+function renderGlobeSide() {
+  const side = $('#globe-side'), cap = $('#globe-cap');
+  if (side) side.innerHTML = globeSideHTML();
+  if (cap) cap.textContent = globeCaption();
+}
+function hitTest(e) {
+  if (!globe.proj) return null;
+  const r = globe.canvas.getBoundingClientRect(), x = e.clientX - r.left, y = e.clientY - r.top;
+  const [cx, cy] = globe.proj.translate();
+  if (Math.hypot(x - cx, y - cy) > globe.proj.scale()) return null;
+  for (const f of globe.world) {
+    if (f.geometry.type !== 'Point' || !(globe.data.byKey.has(f.id) || f.id === globe.sel) || !facing(f.geometry.coordinates)) continue;
+    const q = globe.proj(f.geometry.coordinates);
+    if (Math.hypot(q[0] - x, q[1] - y) < 10) return f;
+  }
+  const ll = globe.proj.invert([x, y]);
+  return ll ? globe.world.find(f => f.geometry.type !== 'Point' && d3.geoContains(f, ll)) || null : null;
+}
+function drawGlobe() {
+  const { ctx, proj, path, size } = globe;
+  if (!proj || !size) return;
+  const css = getComputedStyle(document.documentElement), col = n => css.getPropertyValue(n).trim();
+  const fg = col('--fg'), red = col('--red'), rule = col('--rule'), dpr = window.devicePixelRatio || 1;
+  ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+  ctx.clearRect(0, 0, size, size);
+  proj.rotate(globe.rot);
+  const has = id => globe.data.byKey.has(id);
+  ctx.beginPath(); path({ type: 'Sphere' }); ctx.fillStyle = col('--block'); ctx.fill();
+  ctx.beginPath(); path(globe.grat); ctx.strokeStyle = rule; ctx.globalAlpha = .15; ctx.lineWidth = 1; ctx.stroke(); ctx.globalAlpha = 1;
+  for (const f of globe.world) {
+    if (f.geometry.type === 'Point') continue;
+    ctx.beginPath(); path(f);
+    ctx.fillStyle = f.id === globe.sel ? fg : has(f.id) ? red : col('--bg');
+    ctx.fill();
+  }
+  ctx.beginPath();
+  for (const f of globe.world) if (f.geometry.type !== 'Point') path(f);
+  ctx.strokeStyle = rule; ctx.globalAlpha = .5; ctx.lineWidth = .6; ctx.stroke(); ctx.globalAlpha = 1;
+  const hov = globe.hover && globe.hover !== globe.sel && featOf(globe.hover);
+  if (hov && hov.geometry.type !== 'Point') { ctx.beginPath(); path(hov); ctx.strokeStyle = fg; ctx.lineWidth = 2; ctx.stroke(); }
+  for (const f of globe.world) {
+    if (f.geometry.type !== 'Point' || !(has(f.id) || f.id === globe.sel) || !facing(f.geometry.coordinates)) continue;
+    const [x, y] = proj(f.geometry.coordinates);
+    ctx.fillStyle = f.id === globe.sel ? fg : red; ctx.fillRect(x - 4, y - 4, 8, 8);
+    ctx.strokeStyle = fg; ctx.lineWidth = f.id === globe.hover ? 2.5 : 1.5; ctx.strokeRect(x - 4, y - 4, 8, 8);
+  }
+  ctx.beginPath(); path({ type: 'Sphere' }); ctx.strokeStyle = rule; ctx.lineWidth = 2; ctx.stroke();
+  const n = globe.data.list.filter(c => c.code).length;
+  globe.canvas.setAttribute('aria-label', n ? `Globo terráqueo con ${n} ${n === 1 ? 'país marcado' : 'países marcados'}: ${globe.data.list.filter(c => c.code).map(c => c.name).join(', ')}.` : 'Globo terráqueo sin países marcados.');
+}
+function globeLoop() { if (!globe.raf && globe.visible && !document.hidden && (globe.spin || globe.anim)) { globe.last = performance.now(); globe.raf = requestAnimationFrame(globeTick); } }
+function globeTick(t) {
+  globe.raf = 0;
+  if (!globe.visible || document.hidden) return;
+  const dt = Math.min(64, t - globe.last); globe.last = t;
+  if (globe.anim) {
+    const a = globe.anim, k = Math.min(1, (t - a.t0) / a.ms), e = k < .5 ? 2 * k * k : 1 - Math.pow(-2 * k + 2, 2) / 2;
+    globe.rot = [a.from[0] + a.d0 * e, a.from[1] + (a.to[1] - a.from[1]) * e];
+    if (k >= 1) globe.anim = null;
+  } else if (globe.spin) globe.rot = [globe.rot[0] + dt * 0.006, globe.rot[1]];
+  else return;
+  drawGlobe();
+  globe.raf = requestAnimationFrame(globeTick);
+}
+function pauseSpin() { globe.spin = false; clearTimeout(globe.spinT); }
+function resumeSpinLater() {
+  clearTimeout(globe.spinT);
+  if (!globe.sel && !reduced()) globe.spinT = setTimeout(() => { globe.spin = true; globeLoop(); }, 6000);
+}
+function rotateTo(f) {
+  const c = centerOf(f), to = [-c[0], Math.max(-60, Math.min(60, -c[1]))];
+  if (reduced() || !globe.visible) { globe.rot = to; drawGlobe(); return; }
+  const from = globe.rot.slice(), d0 = ((to[0] - from[0]) % 360 + 540) % 360 - 180;
+  globe.anim = { from, to, d0, t0: performance.now(), ms: 650 };
+  globeLoop();
+}
+function selectCountry(key, center) {
+  globe.sel = key && (center || globe.sel !== key) ? key : null;
+  pauseSpin();
+  const f = globe.sel && featOf(globe.sel);
+  if (f && center) rotateTo(f); else drawGlobe();
+  if (!globe.sel) resumeSpinLater();
+  renderGlobeSide();
+}
+function createGlobeCanvas() {
+  const c = document.createElement('canvas');
+  c.setAttribute('role', 'img');
+  globe.canvas = c; globe.ctx = c.getContext('2d');
+  let drag = null;
+  c.addEventListener('pointerdown', e => {
+    if (!globe.proj) return;
+    drag = { x: e.clientX, y: e.clientY, rot: globe.rot.slice(), moved: false, id: e.pointerId, touch: e.pointerType === 'touch' };
+    try { c.setPointerCapture(e.pointerId); } catch {}
+    pauseSpin(); globe.anim = null;
+  });
+  c.addEventListener('pointermove', e => {
+    if (!globe.proj) return;
+    if (drag && e.pointerId === drag.id) {
+      const dx = e.clientX - drag.x, dy = e.clientY - drag.y;
+      if (Math.abs(dx) + Math.abs(dy) > 5) drag.moved = true;
+      const k = 180 / (Math.PI * globe.proj.scale());
+      globe.rot = [drag.rot[0] + dx * k, drag.touch ? drag.rot[1] : Math.max(-80, Math.min(80, drag.rot[1] - dy * k))];
+      drawGlobe();
+      return;
+    }
+    if (e.pointerType !== 'mouse') return;
+    const f = hitTest(e), id = f ? f.id : null;
+    if (id !== globe.hover) { globe.hover = id; c.style.cursor = id ? 'pointer' : ''; drawGlobe(); renderGlobeSide(); }
+  });
+  const end = e => {
+    if (!drag || e.pointerId !== drag.id) return;
+    const d = drag; drag = null;
+    if (!d.moved && e.type === 'pointerup') { const f = hitTest(e); selectCountry(f ? f.id : null, false); }
+    else resumeSpinLater();
+  };
+  c.addEventListener('pointerup', end);
+  c.addEventListener('pointercancel', end);
+  c.addEventListener('pointerleave', () => { if (globe.hover) { globe.hover = null; drawGlobe(); renderGlobeSide(); } });
+  new IntersectionObserver(es => { globe.visible = es[0].isIntersecting; if (globe.visible) globeLoop(); }).observe(c);
+  globe.ro = new ResizeObserver(() => globeResize());
+}
+function globeResize() {
+  const stage = globe.canvas.parentElement;
+  if (!stage || !globe.proj) return;
+  const size = Math.round(stage.clientWidth), dpr = window.devicePixelRatio || 1;
+  if (!size) return;
+  globe.size = size;
+  globe.canvas.width = Math.round(size * dpr); globe.canvas.height = Math.round(size * dpr);
+  globe.proj.translate([size / 2, size / 2]).scale(size / 2 - 2);
+  drawGlobe();
+}
+function mountGlobe() {
+  const stage = $('#globe-stage');
+  if (!stage) return;
+  if (!globe.canvas) createGlobeCanvas();
+  stage.appendChild(globe.canvas);
+  globe.ro.disconnect(); globe.ro.observe(stage);
+  if (!globe.proj) stage.dataset.state = 'loading';
+  globeLoad().then(() => {
+    delete stage.dataset.state;
+    if (!globe.proj) {
+      globe.proj = d3.geoOrthographic().clipAngle(90).precision(0.6);
+      globe.path = d3.geoPath(globe.proj, globe.ctx);
+      globe.grat = d3.geoGraticule10();
+      const top = globe.data.list.find(c => c.code && featOf(c.code));
+      const c = top ? centerOf(featOf(top.code)) : [-99, 19];
+      globe.rot = [-c[0], Math.max(-40, Math.min(40, -c[1]))];
+      globe.spin = !reduced();
+    }
+    globeResize();
+    globeLoop();
+  }).catch(() => {
+    delete stage.dataset.state;
+    stage.innerHTML = '<p class="note globe-msg">No se pudo cargar el globo. Revisa tu conexión.</p>';
+  });
+}
+document.addEventListener('visibilitychange', globeLoop);
 
 /* ================= Bibliotecario ================= */
 async function askLibrarian(mood) {
@@ -2636,6 +2929,7 @@ function renderDatalists() {
   const uniq = key => [...new Set(Store.books.map(b => (b[key] || '').trim()).filter(Boolean))].sort(collator.compare);
   $('#authors').innerHTML = uniq('autor').map(a => `<option value="${esc(a)}">`).join('');
   $('#publishers').innerHTML = uniq('editorial').map(a => `<option value="${esc(a)}">`).join('');
+  if (!$('#paises').options.length) $('#paises').innerHTML = REGIONS.map(regionName).sort(collator.compare).map(n => `<option value="${esc(n)}">`).join('');
 }
 function renderFooter() {
   $('#storage-note').innerHTML = Store.mode === 'db' ? '<span class="store-dot"></span>Guardado en tu cuenta' : Store.mode === 'local' ? '<span class="store-dot local"></span>Guardado en este navegador' : '';
@@ -2855,6 +3149,8 @@ $('#report').addEventListener('submit', async e => {
 });
 $('#report').addEventListener('click', async e => {
   if (e.target.closest('#btn-cartel')) { makeCartel(); return; }
+  const pa = e.target.closest('[data-pais]');
+  if (pa) { selectCountry(pa.dataset.pais, true); return; }
   const m = e.target.closest('[data-mood]');
   if (m) { askLibrarian(m.dataset.mood); return; }
   const r = e.target.closest('[data-adv="read"]');
